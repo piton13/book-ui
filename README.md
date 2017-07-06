@@ -486,5 +486,6 @@ enjoy — **AngularClass**
 
 ___
 
+
 # License
  [MIT](/LICENSE)
