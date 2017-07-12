@@ -6,6 +6,7 @@ import {
 import { AppState } from '../app.service';
 import { Title } from './title';
 import { XLargeDirective } from './x-large';
+import { Http } from '@angular/http';
 
 @Component({
   /**
@@ -23,7 +24,7 @@ import { XLargeDirective } from './x-large';
   /**
    * Our list of styles in our component. We may add more to compose many styles together.
    */
-  styleUrls: [ './home.component.css' ],
+  styleUrls: ['./home.component.css'],
   /**
    * Every Angular template is first compiled by the browser before Angular runs it's compiler.
    */
@@ -34,13 +35,15 @@ export class HomeComponent implements OnInit {
    * Set our default values
    */
   public localState = { value: '' };
+  private abc: number = 0;
+
   /**
    * TypeScript public modifiers
    */
-  constructor(
-    public appState: AppState,
-    public title: Title
-  ) {}
+  constructor(public appState: AppState,
+              public title: Title,
+              public http: Http) {
+  }
 
   public ngOnInit() {
     console.log('hello `Home` component');
@@ -50,8 +53,13 @@ export class HomeComponent implements OnInit {
   }
 
   public submitState(value: string) {
+    this.abc += 1;
     console.log('submitState', value);
     this.appState.set('value', value);
     this.localState.value = '';
+    this.http.get(`http://localhost:8080/user/4`)
+      .subscribe((res) => {
+        console.log(res);
+      });
   }
 }
