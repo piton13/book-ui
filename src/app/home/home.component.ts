@@ -57,8 +57,10 @@ export class HomeComponent implements OnInit {
     console.log('submitState', value);
     this.appState.set('value', value);
     this.localState.value = '';
-    this.http.get(`http://localhost:8080/user/4`)
+    this.http.get(`http://localhost:7777/people`)
       .subscribe((res) => {
+        let data = res.json();
+        this.abc = data.length;
         console.log(res);
       });
   }
